@@ -4,3 +4,12 @@ main: ink.neokoni.lightTag.LightTag
 api-version: '1.21'
 authors: [ Neokoni ]
 website: https://github.com/Neokoni/LightTag
+
+folia-supported: true
+
+dependencies:
+  server:
+    PlaceholderAPI:
+      load: BEFORE
+      required: true
+      join-classpath: true

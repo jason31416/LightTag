@@ -1,0 +1,12 @@
+0:
+  type: STATIC
+  content: "<yellow>Test"
+1:
+  type: ANIMATION
+  delay: 5
+  banner: "O.o"
+  content:
+    - "O.o"
+    - "o.o"
+    - "o.O"
+    - "o.o"
