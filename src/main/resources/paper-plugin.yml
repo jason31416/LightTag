@@ -1,0 +1,6 @@
+name: LightTag
+version: '0.1'
+main: ink.neokoni.lightTag.LightTag
+api-version: '1.21'
+authors: [ Neokoni ]
+website: https://github.com/Neokoni/LightChat
