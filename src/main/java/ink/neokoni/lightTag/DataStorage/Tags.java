@@ -4,6 +4,7 @@ import ink.neokoni.lightTag.LightTag;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Tags {
     private static File pluginFolder = LightTag.getInstance().getDataFolder();
@@ -30,5 +31,14 @@ public class Tags {
 
     public static YamlConfiguration getTags() {
         return tags;
+    }
+
+    public static void writeToFile() {
+        File tagsFile = new File(pluginFolder, "tags.yml");
+        try {
+            tags.save(tagsFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
