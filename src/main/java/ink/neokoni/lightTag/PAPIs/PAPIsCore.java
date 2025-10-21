@@ -2,10 +2,6 @@ package ink.neokoni.lightTag.PAPIs;
 
 import ink.neokoni.lightTag.LightTag;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,13 +28,15 @@ public class PAPIsCore extends PlaceholderExpansion {
 
     @Override
     public String onPlaceholderRequest(Player player, @NotNull String params) {
-        Component a = MiniMessage.miniMessage().deserialize("<gradient:#5e4fa2:#f79459>||||||||||||||||||||||||</gradient>");
-        String de = LegacyComponentSerializer.legacySection().serialize(a);
-        Bukkit.getConsoleSender().sendMessage("彩色文字测试：" + de);
         switch (params) {
-            default -> {
-                return de;
+            case "using_static": {
+                return new PlayerUsingStaticTagPAPI(player).get();
             }
+            case "using": {
+                return new PlayerUsingDynamicTagPAPI(player).get();
+            }
+
         }
+        return null;
     }
 }

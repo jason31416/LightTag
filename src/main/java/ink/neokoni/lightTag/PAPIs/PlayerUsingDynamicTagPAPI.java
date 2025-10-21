@@ -1,0 +1,70 @@
+package ink.neokoni.lightTag.PAPIs;
+
+import ink.neokoni.lightTag.DataStorage.PlayerDatas;
+import ink.neokoni.lightTag.DataStorage.Tags;
+import ink.neokoni.lightTag.Utils.TagUtils;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+
+public class PlayerUsingDynamicTagPAPI {
+    private Player player;
+    private int using; // tag id
+    private int animateDely=0;
+    private int delayTickTimer=0;
+    private int animateTimer = 0; // timer for animte frame cont
+    private String tagType;
+    private Component[] frames;
+
+    public PlayerUsingDynamicTagPAPI(Player p) {
+        player = p;
+
+        YamlConfiguration playerData = PlayerDatas.getPlayerData();
+        String usevalue = playerData.getString(player.getUniqueId()+".using");
+
+        if(usevalue==null) {
+            return;
+        }
+
+        using = Integer.getInteger(usevalue);
+
+        frames = TagUtils.getTagContentById(using);
+        if (frames==null) {
+            return;
+        }
+
+        tagType = Tags.getTags().getString(using+".type");
+
+        if (!tagType.equals("ANIMATION")) {
+            return;
+        }
+
+        animateDely = Tags.getTags().getInt(using+".delay");
+    }
+
+    public String get() {
+        if (tagType.equals("ANIMATION") && animateTimer== frames.length) {
+            animateTimer = 0;
+        }
+
+        switch (tagType) {
+            case "STATIC": {
+                return LegacyComponentSerializer.legacySection().serialize(frames[0]);
+            }
+            case "ANIMATION": {
+                if (animateDely>0 && delayTickTimer<animateDely-1) {
+                    delayTickTimer++;
+                    String frame = LegacyComponentSerializer.legacySection().serialize(frames[animateTimer]);
+                    return frame;
+                }
+                String frame = LegacyComponentSerializer.legacySection().serialize(frames[animateTimer]);
+                animateTimer++;
+                return frame;
+            }
+            default: {
+                return null;
+            }
+        }
+    }
+}
