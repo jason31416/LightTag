@@ -12,7 +12,7 @@ public class PlayerJoinHandler implements Listener {
     private void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         YamlConfiguration data = PlayerDatas.getPlayerData();
-        if (data==null||!data.isSet(player.getUniqueId()+".type")) {
+        if (!data.isSet(player.getUniqueId()+".using")) {
             data.set(player.getUniqueId()+".using", "0");
         }
     }

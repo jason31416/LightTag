@@ -26,8 +26,7 @@ public class PlayerUsingDynamicTagPAPI {
         if(usevalue==null) {
             return;
         }
-
-        using = Integer.getInteger(usevalue);
+        using = Integer.valueOf(usevalue);
 
         frames = TagUtils.getTagContentById(using);
         if (frames==null) {
@@ -59,6 +58,7 @@ public class PlayerUsingDynamicTagPAPI {
                     return frame;
                 }
                 String frame = LegacyComponentSerializer.legacySection().serialize(frames[animateTimer]);
+                delayTickTimer=0;
                 animateTimer++;
                 return frame;
             }

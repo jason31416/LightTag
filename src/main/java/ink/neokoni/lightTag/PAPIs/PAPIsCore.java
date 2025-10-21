@@ -5,7 +5,11 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class PAPIsCore extends PlaceholderExpansion {
+    private static Map<Player, PlayerUsingDynamicTagPAPI> cache = new ConcurrentHashMap<>();
 
     @Override
     public @NotNull String getIdentifier() {
@@ -33,10 +37,24 @@ public class PAPIsCore extends PlaceholderExpansion {
                 return new PlayerUsingStaticTagPAPI(player).get();
             }
             case "using": {
-                return new PlayerUsingDynamicTagPAPI(player).get();
+                if (!cache.containsKey(player)) {
+                    PlayerUsingDynamicTagPAPI dynamicTagPAPI = new PlayerUsingDynamicTagPAPI(player);
+                    cache.put(player, dynamicTagPAPI);
+                    return dynamicTagPAPI.get();
+                }
+
+                return cache.get(player).get();
             }
 
         }
         return null;
+    }
+
+    public static void clearCache() {
+        cache = new ConcurrentHashMap<>();
+    }
+
+    public static void clear(Player player) {
+        cache.remove(player);
     }
 }
