@@ -1,8 +1,10 @@
 package ink.neokoni.lightTag.Commands;
 
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import ink.neokoni.lightTag.Commands.Functions.ReloadCommand;
+import ink.neokoni.lightTag.Commands.Functions.SetTagCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 
@@ -15,7 +17,11 @@ public class AliasCommands {
                             new ReloadCommand(ctx.getSource().getSender());
                             return Command.SINGLE_SUCCESS;
                         }))
-                .then(Commands.literal("set"))
+                .then(Commands.literal("set").then(Commands.argument("id", IntegerArgumentType.integer(1))
+                        .executes(ctx -> {
+                            new SetTagCommand(ctx.getSource().getSender(), ctx.getArgument("id", Integer.class));
+                            return Command.SINGLE_SUCCESS;
+                        })))
                 .then(Commands.literal("unset"))
                 .then(Commands.literal("list"));
     }
