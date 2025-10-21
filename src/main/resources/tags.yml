@@ -1,12 +1,38 @@
-0:
-  type: STATIC
-  content: "<yellow>Test"
+# ID number ID号
 1:
+  # Tag Type 称号类型
+  # STATIC 静态, ANIMATION 动画
+  type: STATIC
+  # tag content 称号内容
+  content: "[<gray>Player<gray>]"
+
+2:
   type: ANIMATION
-  delay: 5
-  banner: "O.o"
+  # Refresh delay 刷新延迟
+  # 简单来说，每 {delay} 次Placeholder API请求刷新一次
+  # 设置为小于1时关闭
+  # Per {delay} time placeholder api request refresh once
+  # Set <1 to close delay
+  delay: 0
+  # 静态展示内容，用于不会动态刷新的地方显示，比如聊天消息
+  # static display content, display on where can't refresh, such as chat list
+  banner: "<gradient:#A196E5:#6097D2>Animation</gradient>"
+  # 动画内容，每一行为一帧， 顺序显示
+  # Animation content, every line is a frame, display from follow list
   content:
-    - "O.o"
-    - "o.o"
-    - "o.O"
-    - "o.o"
+    - "<gradient:#A196E5:#6097D2>Animation</gradient>"
+    - "<gradient:#9196E0:#5097CD>Animation</gradient>"
+    - "<gradient:#8197DB:#C196EE>Animation</gradient>"
+    - "<gradient:#7097D6:#B196E9>Animation</gradient>"
+    - "<gradient:#6097D2:#B196E9>Animation</gradient>"
+    - "<gradient:#5097CD:#9196E0>Animation</gradient>"
+    - "<gradient:#4097C8:#8197DB>Animation</gradient>"
+    - "<gradient:#C196EE:#8197DB>Animation</gradient>"
+    - "<gradient:#B196E9:#7097D6>Animation</gradient>"
+    - "<gradient:#A196E5:#6097D2>Animation</gradient>"
+    - "<gradient:#9196E0:#5097CD>Animation</gradient>"
+    - "<gradient:#8197DB:#C196EE>Animation</gradient>"
+    - "<gradient:#7097D6:#B196E9>Animation</gradient>"
+    - "<gradient:#6097D2:#B196E9>Animation</gradient>"
+    - "<gradient:#5097CD:#9196E0>Animation</gradient>"
+    - "<gradient:#4097C8:#8197DB>Animation</gradient>"
