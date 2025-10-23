@@ -26,7 +26,6 @@ public class SetTagGUI {
         menu = new ChestMenu(6);
 
         YamlConfiguration data = PlayerDatas.getPlayerData();
-//        int using = data.getInt(this.player.getUniqueId()+".using");
         List<Integer> owns = data.getIntegerList(this.player.getUniqueId()+".owns");
 
         for (int i : owns) {

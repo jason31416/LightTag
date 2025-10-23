@@ -11,10 +11,11 @@ public class ChestMenu {
     private int size = 9;
     private ItemStack[] items = new ItemStack[size];
     private Inventory menu;
-
+    private String[] customData;
     public ChestMenu(int row) {
         size = row*9;
         items = new ItemStack[size];
+        customData = new String[size];
     }
 
     public void setTitle(String title) {
@@ -37,6 +38,10 @@ public class ChestMenu {
         }
     }
 
+    public void setCustomData(int slot, String data) {
+        customData[slot] = data;
+    }
+
     public void open(Player player) {
         menu = Bukkit.createInventory(null, size, title);
         for (int i = 0; i < size; i++) {
@@ -48,5 +53,9 @@ public class ChestMenu {
 
     public Inventory getInv() {
         return menu;
+    }
+
+    public String getCustomData(int slot) {
+        return customData[slot];
     }
 }
