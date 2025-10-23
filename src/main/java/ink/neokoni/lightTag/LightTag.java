@@ -7,11 +7,13 @@ import ink.neokoni.lightTag.DataStorage.PlayerDatas;
 import ink.neokoni.lightTag.DataStorage.Tags;
 import ink.neokoni.lightTag.Handler.PlayerJoinHandler;
 import ink.neokoni.lightTag.Handler.PlayerQuitHandler;
+import ink.neokoni.lightTag.Handler.TagsInventoryHandlers;
 import ink.neokoni.lightTag.PAPIs.PAPIsCore;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LightTag extends JavaPlugin {
     private static LightTag instance;
+    public static final int tagN = -23351;
 
     @Override
     public void onEnable() {
@@ -29,6 +31,7 @@ public final class LightTag extends JavaPlugin {
 
         new PlayerJoinHandler(this); // register Event listener
         new PlayerQuitHandler(this);
+        new TagsInventoryHandlers(this);
     }
 
     @Override

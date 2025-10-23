@@ -3,10 +3,12 @@ package ink.neokoni.lightTag.Utils;
 import ink.neokoni.lightTag.DataStorage.Tags;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class TagUtils {
     public static Component[] getTagContentById(int id) {
@@ -42,6 +44,41 @@ public class TagUtils {
                     components[i] = MiniMessage.miniMessage().deserialize(s.get(i));
                 }
                 return components;
+            }
+        }
+    }
+    
+    public static String getTypeById(int id) {
+        String type = Tags.getTags().getString(id+".type");
+        return type==null?"null" : type;
+    }
+    
+    public static Component getViewById(int id) {
+        String type = getTypeById(id);
+        switch (type) {
+            case "STATIC": {
+                return MiniMessage.miniMessage().deserialize(Tags.getTags().getString(id+".content"));
+            }
+            case "ANIMATION": {
+                return MiniMessage.miniMessage().deserialize(Tags.getTags().getString(id+".banner"));
+            }
+            default: {
+                String banner = Tags.getTags().getString(id+".banner");
+                try {
+                    banner = Tags.getTags().getStringList(id+".content").getFirst();
+                } catch (NoSuchElementException e) {
+                    Bukkit.getLogger().warning("Tag id: "+id+" not have type and not animation");
+                }
+//                if (banner==null) {
+//                    banner = Tags.getTags().getStringList(id+".content").getFirst();
+//                }
+                if (banner==null) {
+                    banner = Tags.getTags().getString(id+".content");
+                }
+                if (banner!=null) {
+                    return MiniMessage.miniMessage().deserialize(banner);
+                }
+                return Component.text("null"); // i not want null pointer
             }
         }
     }

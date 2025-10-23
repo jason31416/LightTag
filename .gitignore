@@ -103,7 +103,7 @@ $RECYCLE.BIN/
 .gradle
 build/
 
-# Ignore Gradle GUI config
+# Ignore Gradle GUIs config
 gradle-app.setting
 
 # Cache of project

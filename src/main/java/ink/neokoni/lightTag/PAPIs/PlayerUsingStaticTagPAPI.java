@@ -2,8 +2,8 @@ package ink.neokoni.lightTag.PAPIs;
 
 import ink.neokoni.lightTag.DataStorage.PlayerDatas;
 import ink.neokoni.lightTag.DataStorage.Tags;
+import ink.neokoni.lightTag.Utils.TagUtils;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -27,28 +27,7 @@ public class PlayerUsingStaticTagPAPI {
             return;
         }
 
-        switch (tagInfo.getString(using+".type")) {
-            case "STATIC": {
-                tag = MiniMessage.miniMessage().deserialize(tagInfo.getString(using+".content"));
-                return;
-            }
-            case "ANIMATION": {
-                tag = MiniMessage.miniMessage().deserialize(tagInfo.getString(using+".banner"));
-                return;
-            }
-            default: {
-                banner = tagInfo.getString(using+".banner");
-                if (banner==null) {
-                    banner = tagInfo.getStringList(using+".content").getFirst();
-                }
-                if (banner==null) {
-                    banner = tagInfo.getString(using+".content");
-                }
-                if (banner!=null) {
-                    tag = MiniMessage.miniMessage().deserialize(banner);
-                }
-            }
-        }
+        tag = TagUtils.getViewById(Integer.valueOf(using));
     }
 
     public String get() {
