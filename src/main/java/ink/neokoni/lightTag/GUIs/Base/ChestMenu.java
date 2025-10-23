@@ -11,11 +11,11 @@ public class ChestMenu {
     private int size = 9;
     private ItemStack[] items = new ItemStack[size];
     private Inventory menu;
-    private String[] customData;
+    private String[] customDatas;
     public ChestMenu(int row) {
         size = row*9;
         items = new ItemStack[size];
-        customData = new String[size];
+        customDatas = new String[size];
     }
 
     public void setTitle(String title) {
@@ -38,8 +38,17 @@ public class ChestMenu {
         }
     }
 
+    public void put(ItemStack item, String customData) {
+        int cur_slot = 0;
+        while (items[cur_slot]!=null&&cur_slot<55) {
+            cur_slot++;
+        }
+        items[cur_slot] = item;
+        customDatas[cur_slot] = customData;
+    }
+
     public void setCustomData(int slot, String data) {
-        customData[slot] = data;
+        customDatas[slot] = data;
     }
 
     public void open(Player player) {
@@ -56,6 +65,6 @@ public class ChestMenu {
     }
 
     public String getCustomData(int slot) {
-        return customData[slot];
+        return customDatas[slot];
     }
 }

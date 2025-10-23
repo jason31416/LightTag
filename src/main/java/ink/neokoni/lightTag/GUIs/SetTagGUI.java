@@ -5,7 +5,7 @@ import ink.neokoni.lightTag.DataStorage.Caches;
 import ink.neokoni.lightTag.DataStorage.PlayerDatas;
 import ink.neokoni.lightTag.DataStorage.Tags;
 import ink.neokoni.lightTag.GUIs.Base.ChestMenu;
-import ink.neokoni.lightTag.LightTag;
+import ink.neokoni.lightTag.Utils.Item.ItemCustomDataUtils;
 import ink.neokoni.lightTag.Utils.TagUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -44,11 +44,9 @@ public class SetTagGUI {
                     MiniMessage.miniMessage().deserialize(""),
                     MiniMessage.miniMessage().deserialize("点击使用")
             ));
-            meta.setCustomModelData(i + LightTag.tagN);
-
             tagItem.setItemMeta(meta);
 
-            menu.put(tagItem);
+            menu.put(tagItem, "TagID:"+i);
         }
 
         menu.setTitle("<yellow>设置称号");
@@ -70,8 +68,8 @@ public class SetTagGUI {
 
         ItemStack item = event.getCurrentItem();
 
-        if (item!=null&&item.getItemMeta().hasCustomModelData()) {
-            int id = item.getItemMeta().getCustomModelData() - LightTag.tagN;
+        if (item!=null&& ItemCustomDataUtils.getInt(item, menu, "TagID") > -1) {
+            int id = ItemCustomDataUtils.getInt(item, menu, "TagID");
 
             new SetTagCommand(player, id);
             Caches.setTagGUI.remove(event.getClickedInventory());
