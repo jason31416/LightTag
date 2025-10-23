@@ -1,5 +1,7 @@
 package ink.neokoni.lightTag.GUIs;
 
+import ink.neokoni.lightTag.Commands.Functions.SetTagCommand;
+import ink.neokoni.lightTag.DataStorage.Caches;
 import ink.neokoni.lightTag.DataStorage.PlayerDatas;
 import ink.neokoni.lightTag.DataStorage.Tags;
 import ink.neokoni.lightTag.GUIs.Base.ChestMenu;
@@ -10,6 +12,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -54,5 +57,30 @@ public class SetTagGUI {
 
     public void open() {
         menu.open(player);
+        Caches.setTagGUI.put(menu.getInv(), this);
+    }
+
+    public ChestMenu getMenu() {
+        return menu;
+    }
+
+    public void handleClick(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player)) {
+            return;
+        }
+
+        ItemStack item = event.getCurrentItem();
+
+        if (item!=null&&item.getItemMeta().hasCustomModelData()) {
+            int id = item.getItemMeta().getCustomModelData() - LightTag.tagN;
+
+            new SetTagCommand(player, id);
+            Caches.setTagGUI.remove(event.getClickedInventory());
+            event.getInventory().close();
+            return;
+        }
+
+        // todo: other is placeholder item or other functions
+
     }
 }

@@ -1,10 +1,8 @@
 package ink.neokoni.lightTag.GUIs.Base;
 
-import ink.neokoni.lightTag.DataStorage.Caches;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
 
@@ -46,7 +44,6 @@ public class ChestMenu {
         }
 
         player.openInventory(menu);
-        Caches.menuCache.put(player, menu);
     }
 
     public Inventory getInv() {
