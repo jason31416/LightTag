@@ -9,6 +9,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PlayerJoinHandler implements Listener {
     public PlayerJoinHandler(LightTag plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -22,5 +25,13 @@ public class PlayerJoinHandler implements Listener {
         if (!data.isSet(player.getUniqueId()+".using")) {
             data.set(player.getUniqueId()+".using", config.getInt("init-tag"));
         }
+
+        if (config.getInt("init-tag") > -1 && data.getIntegerList(player.getUniqueId()+".owns").isEmpty()) {
+            List<Integer> ownedTags = new ArrayList<>();
+            ownedTags.add(config.getInt("init-tag"));
+            data.set(player.getUniqueId()+".owns", ownedTags);
+        }
+
+        PlayerDatas.savePlayerData(data);
     }
 }
