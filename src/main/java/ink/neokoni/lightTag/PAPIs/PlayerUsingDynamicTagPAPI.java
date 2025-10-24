@@ -47,6 +47,10 @@ public class PlayerUsingDynamicTagPAPI {
     }
 
     public String get() {
+        if (using<0) {
+            return "";
+        }
+
         if (tagType.equals("ANIMATION") && animateTimer== frames.length) {
             animateTimer = 0;
         }
@@ -67,7 +71,7 @@ public class PlayerUsingDynamicTagPAPI {
                 return frame;
             }
             default: {
-                return null;
+                return "";
             }
         }
     }

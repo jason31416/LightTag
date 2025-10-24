@@ -3,6 +3,7 @@ package ink.neokoni.lightTag.Commands;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import ink.neokoni.lightTag.Commands.Functions.ClearTag;
 import ink.neokoni.lightTag.Commands.Functions.ReloadCommand;
 import ink.neokoni.lightTag.Commands.Functions.SetTagCommand;
 import ink.neokoni.lightTag.GUIs.SetTagGUI;
@@ -31,13 +32,18 @@ public class AliasCommands {
                         })
 
                         .then(Commands.argument("id", IntegerArgumentType.integer(1))
-                        .executes(ctx -> {
-                            new SetTagCommand(ctx.getSource().getSender(), ctx.getArgument("id", Integer.class));
-                            return Command.SINGLE_SUCCESS;
+                            .executes(ctx -> {
+                                new SetTagCommand(ctx.getSource().getSender(), ctx.getArgument("id", Integer.class));
+                                return Command.SINGLE_SUCCESS;
                         })))
                 .then(Commands.literal("unset"))
                 .then(Commands.literal("list"))
                 .then(Commands.literal("add"))
-                .then(Commands.literal("remove"));
+                .then(Commands.literal("remove"))
+                .then(Commands.literal("clear")
+                    .executes(ctx -> {
+                        new ClearTag(ctx.getSource().getSender());
+                        return Command.SINGLE_SUCCESS;
+                    }));
     }
 }
