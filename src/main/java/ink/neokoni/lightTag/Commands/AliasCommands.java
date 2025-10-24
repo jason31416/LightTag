@@ -58,7 +58,6 @@ public class AliasCommands {
                                                                     ctx.getSource().getSender());
                                                             return Command.SINGLE_SUCCESS;
                                                         }))))))
-                .then(Commands.literal("remove"))
                 .then(Commands.literal("clear")
                     .executes(ctx -> {
                         new ClearTag(ctx.getSource().getSender());
