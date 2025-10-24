@@ -3,3 +3,6 @@
 # 只影响修改后加入的新玩家
 # Only effect new players after modified it
 init-tag: -1
+# 消息前缀
+# As word "prefix" means
+prefix: "<white>[<color:#96bfff>LTag<white>] "
