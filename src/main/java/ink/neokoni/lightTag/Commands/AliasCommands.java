@@ -36,7 +36,6 @@ public class AliasCommands {
                                 new SetTag(ctx.getSource().getSender(), ctx.getArgument("id", Integer.class));
                                 return Command.SINGLE_SUCCESS;
                         })))
-                .then(Commands.literal("unset"))
                 .then(Commands.literal("list"))
                 .then(Commands.literal("add"))
                 .then(Commands.literal("remove"))
