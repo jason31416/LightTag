@@ -8,8 +8,8 @@ import ink.neokoni.lightTag.PAPIs.PAPIsCore;
 import ink.neokoni.lightTag.Utils.TextUtils;
 import org.bukkit.command.CommandSender;
 
-public class ReloadCommand {
-    public ReloadCommand(CommandSender sender) {
+public class Reload {
+    public Reload(CommandSender sender) {
         Configs.loadConfig();
         Languages.loadLanguage();
         Tags.loadTags();

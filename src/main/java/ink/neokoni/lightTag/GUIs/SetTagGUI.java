@@ -1,6 +1,6 @@
 package ink.neokoni.lightTag.GUIs;
 
-import ink.neokoni.lightTag.Commands.Functions.SetTagCommand;
+import ink.neokoni.lightTag.Commands.Functions.SetTag;
 import ink.neokoni.lightTag.DataStorage.Caches;
 import ink.neokoni.lightTag.DataStorage.PlayerDatas;
 import ink.neokoni.lightTag.DataStorage.Tags;
@@ -71,7 +71,7 @@ public class SetTagGUI {
         if (item!=null&& ItemCustomDataUtils.getInt(item, menu, "TagID") > -1) {
             int id = ItemCustomDataUtils.getInt(item, menu, "TagID");
 
-            new SetTagCommand(player, id);
+            new SetTag(player, id);
             Caches.setTagGUI.remove(event.getClickedInventory());
             event.getInventory().close();
             return;

@@ -7,8 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-public class SetTagCommand {
-    public SetTagCommand(CommandSender sender, int id) {
+public class SetTag {
+    public SetTag(CommandSender sender, int id) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(TextUtils.getFormatedLang("system.player-only"));
             return;
