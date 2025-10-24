@@ -17,7 +17,6 @@ public class TagsInventoryHandlers implements Listener {
 
     @EventHandler
     private void onClickInventory(InventoryClickEvent e) {
-        Bukkit.getLogger().warning("Click inv happened");
         Inventory clicked = e.getClickedInventory();
         if (clicked==null) { // not click inside inventory
             return;
@@ -31,7 +30,6 @@ public class TagsInventoryHandlers implements Listener {
     @EventHandler
     private void onInventoryClose(InventoryCloseEvent e) {
         Inventory closed = e.getInventory();
-        Bukkit.getLogger().warning("Closed Inv");
 
         Caches.setTagGUI.remove(closed);
     }

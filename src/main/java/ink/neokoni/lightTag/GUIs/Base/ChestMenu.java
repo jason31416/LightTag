@@ -32,7 +32,6 @@ public class ChestMenu {
             while(items[cur_slot]!=null&&cur_slot<55) {
                 cur_slot++;
             }
-            Bukkit.getLogger().warning("putted "+cur_slot);
             items[cur_slot] = item;
             cur_slot++;
         }
