@@ -1,12 +1,12 @@
 # ID number ID号
-1:
+0:
   # Tag Type 称号类型
   # STATIC 静态, ANIMATION 动画
   type: STATIC
   # tag content 称号内容
   content: "&7[Player]&r"
 
-2:
+1:
   type: ANIMATION
   # Refresh delay 刷新延迟
   # 简单来说，每 {delay} 次Placeholder API请求刷新一次

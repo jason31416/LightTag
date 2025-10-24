@@ -22,8 +22,8 @@ public class PlayerUsingStaticTagPAPI {
         String using = playerData.getString(player.getUniqueId()+".using");
 
         YamlConfiguration tagInfo =Tags.getTags();
-        if (using==null||using.equals("")) {
-            tag=null;
+        if (using==null||using.equals("")||Integer.valueOf(using)<0) {
+            tag=Component.text("");
             return;
         }
 

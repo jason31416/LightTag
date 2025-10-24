@@ -15,7 +15,7 @@ public class PlayerUsingDynamicTagPAPI {
     private int delayTickTimer=0;
     private int animateTimer = 0; // timer for animte frame cont
     private String tagType;
-    private Component[] frames;
+    private Component[] frames = new Component[]{Component.text("")};
 
     public PlayerUsingDynamicTagPAPI(Player p) {
         player = p;
@@ -27,6 +27,10 @@ public class PlayerUsingDynamicTagPAPI {
             return;
         }
         using = Integer.valueOf(usevalue);
+
+        if (using<0) {
+            return;
+        }
 
         frames = TagUtils.getTagContentById(using);
         if (frames==null) {

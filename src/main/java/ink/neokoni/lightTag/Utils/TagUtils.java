@@ -2,7 +2,6 @@ package ink.neokoni.lightTag.Utils;
 
 import ink.neokoni.lightTag.DataStorage.Tags;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;

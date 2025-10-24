@@ -1,5 +1,6 @@
 package ink.neokoni.lightTag.Handler;
 
+import ink.neokoni.lightTag.DataStorage.Configs;
 import ink.neokoni.lightTag.DataStorage.PlayerDatas;
 import ink.neokoni.lightTag.LightTag;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -17,8 +18,9 @@ public class PlayerJoinHandler implements Listener {
     private void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         YamlConfiguration data = PlayerDatas.getPlayerData();
+        YamlConfiguration config = Configs.getConfigs();
         if (!data.isSet(player.getUniqueId()+".using")) {
-            data.set(player.getUniqueId()+".using", "0");
+            data.set(player.getUniqueId()+".using", config.getInt("init-tag"));
         }
     }
 }

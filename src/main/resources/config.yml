@@ -1,0 +1,5 @@
+# 初始化tagID, 小于0表示不启用
+# Initial tag ID, set smaller than 0 to disable
+# 只影响修改后加入的新玩家
+# Only effect new players after modified it
+init-tag: -1
