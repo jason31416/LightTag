@@ -67,4 +67,8 @@ public class ChestMenu {
     public String getCustomData(int slot) {
         return customDatas[slot];
     }
+
+    public int getSize() {
+        return size;
+    }
 }

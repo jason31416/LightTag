@@ -39,7 +39,7 @@ public class SetTagGUI {
             if (isAnimation)meta.setEnchantmentGlintOverride(true);
             meta.lore(List.of(
                     MiniMessage.miniMessage().deserialize("称号: ").append(tagView),
-                    MiniMessage.miniMessage().deserialize(""),
+                    MiniMessage.miniMessage().deserialize("动态称号: "+ (isAnimation?"<yellow>是":"<red>不是")),
                     MiniMessage.miniMessage().deserialize("ID: "+i),
                     MiniMessage.miniMessage().deserialize(""),
                     MiniMessage.miniMessage().deserialize("点击使用")
