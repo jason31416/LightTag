@@ -1,6 +1,8 @@
 system:
-  reload-success: "重载配置文件成功"
+  reload-success: "<color:#ffdbab>重载配置文件成功"
+  player-only: "<color:#ffdbab>仅玩家可运行此命令"
 
 tag:
-  not-have: "你还没有这个称号"
-  successes: "已设置称号"
+  not-have: "<color:#ffc266>你还没有这个称号"
+  successes: "<color:#ffc266>已设置称号"
+  cleared: "<color:#ffc266>已清除称号"

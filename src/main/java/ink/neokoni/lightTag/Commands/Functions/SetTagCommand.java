@@ -2,6 +2,7 @@ package ink.neokoni.lightTag.Commands.Functions;
 
 import ink.neokoni.lightTag.DataStorage.PlayerDatas;
 import ink.neokoni.lightTag.PAPIs.PAPIsCore;
+import ink.neokoni.lightTag.Utils.TextUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -9,7 +10,7 @@ import org.bukkit.entity.Player;
 public class SetTagCommand {
     public SetTagCommand(CommandSender sender, int id) {
         if (!(sender instanceof Player)) {
-            // todo: noly player can run. at least now
+            sender.sendMessage(TextUtils.getFormatedLang("system.player-only"));
             return;
         }
 
@@ -17,12 +18,12 @@ public class SetTagCommand {
 
         YamlConfiguration playerData = PlayerDatas.getPlayerData();
         if (!playerData.getIntegerList(player.getUniqueId()+".owns").contains(id)) {
-            // todo: player not have this tag
+            player.sendMessage(TextUtils.getFormatedLang("tag.not-have"));
             return;
         }
 
         playerData.set(player.getUniqueId()+".using", id);
         PAPIsCore.clear(player);
-        // todo: tips set success
+        player.sendMessage(TextUtils.getFormatedLang("tag.successes"));
     }
 }

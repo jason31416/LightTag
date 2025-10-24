@@ -2,6 +2,7 @@ package ink.neokoni.lightTag.Commands.Functions;
 
 import ink.neokoni.lightTag.DataStorage.PlayerDatas;
 import ink.neokoni.lightTag.PAPIs.PAPIsCore;
+import ink.neokoni.lightTag.Utils.TextUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -18,5 +19,6 @@ public class ClearTag {
         PlayerDatas.savePlayerData(data);
 
         PAPIsCore.clear(player);
+        player.sendMessage(TextUtils.getFormatedLang("tag.cleared"));
     }
 }
