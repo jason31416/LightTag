@@ -4,7 +4,7 @@
   # STATIC 静态, ANIMATION 动画
   type: STATIC
   # tag content 称号内容
-  content: "[<gray>Player<gray>]"
+  content: "&7[Player]&r"
 
 2:
   type: ANIMATION
@@ -16,23 +16,23 @@
   delay: 0
   # 静态展示内容，用于不会动态刷新的地方显示，比如聊天消息
   # static display content, display on where can't refresh, such as chat list
-  banner: "<gradient:#A196E5:#6097D2>Animation</gradient>"
+  banner: "&#4498DB[A&#4498DBn&#4498DBi&#4498DBm&#63A5D3a&#81B2CBt&#A0BFC3i&#BFCBBBo&#DDD8B3n]&r"
   # 动画内容，每一行为一帧， 顺序显示
   # Animation content, every line is a frame, display from follow list
   content:
-    - "<gradient:#A196E5:#6097D2>Animation</gradient>"
-    - "<gradient:#9196E0:#5097CD>Animation</gradient>"
-    - "<gradient:#8197DB:#C196EE>Animation</gradient>"
-    - "<gradient:#7097D6:#B196E9>Animation</gradient>"
-    - "<gradient:#6097D2:#B196E9>Animation</gradient>"
-    - "<gradient:#5097CD:#9196E0>Animation</gradient>"
-    - "<gradient:#4097C8:#8197DB>Animation</gradient>"
-    - "<gradient:#C196EE:#8197DB>Animation</gradient>"
-    - "<gradient:#B196E9:#7097D6>Animation</gradient>"
-    - "<gradient:#A196E5:#6097D2>Animation</gradient>"
-    - "<gradient:#9196E0:#5097CD>Animation</gradient>"
-    - "<gradient:#8197DB:#C196EE>Animation</gradient>"
-    - "<gradient:#7097D6:#B196E9>Animation</gradient>"
-    - "<gradient:#6097D2:#B196E9>Animation</gradient>"
-    - "<gradient:#5097CD:#9196E0>Animation</gradient>"
-    - "<gradient:#4097C8:#8197DB>Animation</gradient>"
+    - "&#4498DB[A&#4498DBn&#4498DBi&#4498DBm&#63A5D3a&#81B2CBt&#A0BFC3i&#BFCBBBo&#DDD8B3n]&r"
+    - "&#4498DB[A&#4498DBn&#4498DBi&#4498DBm&#4498DBa&#63A5D3t&#81B2CBi&#A0BFC3o&#BFCBBBn]&r"
+    - "&#63A5D3[A&#4498DBn&#4498DBi&#4498DBm&#4498DBa&#4498DBt&#63A5D3i&#81B2CBo&#A0BFC3n]&r"
+    - "&#81B2CB[A&#63A5D3n&#4498DBi&#4498DBm&#4498DBa&#4498DBt&#4498DBi&#63A5D3o&#81B2CBn]&r"
+    - "&#A0BFC3[A&#81B2CBn&#63A5D3i&#4498DBm&#4498DBa&#4498DBt&#4498DBi&#4498DBo&#63A5D3n]&r"
+    - "&#BFCBBB[A&#A0BFC3n&#81B2CBi&#63A5D3m&#4498DBa&#4498DBt&#4498DBi&#4498DBo&#4498DBn]&r"
+    - "&#DDD8B3[A&#BFCBBBn&#A0BFC3i&#81B2CBm&#63A5D3a&#4498DBt&#4498DBi&#4498DBo&#4498DBn]&r"
+    - "&#FCE5AB[A&#DDD8B3n&#BFCBBBi&#A0BFC3m&#81B2CBa&#63A5D3t&#4498DBi&#4498DBo&#4498DBn]&r"
+    - "&#DDD8B3[A&#FCE5ABn&#DDD8B3i&#BFCBBBm&#A0BFC3a&#81B2CBt&#63A5D3i&#4498DBo&#4498DBn]&r"
+    - "&#BFCBBB[A&#DDD8B3n&#FCE5ABi&#DDD8B3m&#BFCBBBa&#A0BFC3t&#81B2CBi&#63A5D3o&#4498DBn]&r"
+    - "&#A0BFC3[A&#BFCBBBn&#DDD8B3i&#FCE5ABm&#DDD8B3a&#BFCBBBt&#A0BFC3i&#81B2CBo&#63A5D3n]&r"
+    - "&#81B2CB[A&#A0BFC3n&#BFCBBBi&#DDD8B3m&#FCE5ABa&#DDD8B3t&#BFCBBBi&#A0BFC3o&#81B2CBn]&r"
+    - "&#63A5D3[A&#81B2CBn&#A0BFC3i&#BFCBBBm&#DDD8B3a&#FCE5ABt&#DDD8B3i&#BFCBBBo&#A0BFC3n]&r"
+    - "&#4498DB[A&#63A5D3n&#81B2CBi&#A0BFC3m&#BFCBBBa&#DDD8B3t&#FCE5ABi&#DDD8B3o&#BFCBBBn]&r"
+    - "&#4498DB[A&#4498DBn&#63A5D3i&#81B2CBm&#A0BFC3a&#BFCBBBt&#DDD8B3i&#FCE5ABo&#DDD8B3n]&r"
+    - "&#4498DB[A&#4498DBn&#4498DBi&#63A5D3m&#81B2CBa&#A0BFC3t&#BFCBBBi&#DDD8B3o&#FCE5ABn]&r"

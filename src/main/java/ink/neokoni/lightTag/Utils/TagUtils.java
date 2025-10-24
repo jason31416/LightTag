@@ -3,6 +3,7 @@ package ink.neokoni.lightTag.Utils;
 import ink.neokoni.lightTag.DataStorage.Tags;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -20,13 +21,13 @@ public class TagUtils {
         String tagType = tagsInfo.getString(id+".type");
         switch (tagType) {
             case "STATIC" :{
-                return new Component[]{MiniMessage.miniMessage().deserialize(tagsInfo.getString(id+".content"))};
+                return new Component[]{LegacyComponentSerializer.legacyAmpersand().deserialize(tagsInfo.getString(id+".content"))};
             }
             case "ANIMATION" : {
                 List<String> frame = tagsInfo.getStringList(id+".content");
                 Component frameComponent[] = new Component[frame.size()];
                 for (int i =0;i< frame.size();i++) {
-                    frameComponent[i] = MiniMessage.miniMessage().deserialize(frame.get(i));
+                    frameComponent[i] = LegacyComponentSerializer.legacyAmpersand().deserialize(frame.get(i));
                 }
                 return frameComponent;
             }
@@ -35,13 +36,13 @@ public class TagUtils {
                 String singleContent = tagsInfo.getString(id+".content");
 
                 if (singleContent != null) {
-                    return new Component[]{MiniMessage.miniMessage().deserialize(singleContent)};
+                    return new Component[]{LegacyComponentSerializer.legacyAmpersand().deserialize(singleContent)};
                 }
 
                 s = tagsInfo.getStringList(id+".content");
                 Component components[] = new Component[s.size()];
                 for (int i = 0; i < s.size(); i++) {
-                    components[i] = MiniMessage.miniMessage().deserialize(s.get(i));
+                    components[i] = LegacyComponentSerializer.legacyAmpersand().deserialize(s.get(i));
                 }
                 return components;
             }
@@ -57,10 +58,10 @@ public class TagUtils {
         String type = getTypeById(id);
         switch (type) {
             case "STATIC": {
-                return MiniMessage.miniMessage().deserialize(Tags.getTags().getString(id+".content"));
+                return LegacyComponentSerializer.legacyAmpersand().deserialize(Tags.getTags().getString(id+".content"));
             }
             case "ANIMATION": {
-                return MiniMessage.miniMessage().deserialize(Tags.getTags().getString(id+".banner"));
+                return LegacyComponentSerializer.legacyAmpersand().deserialize(Tags.getTags().getString(id+".banner"));
             }
             default: {
                 String banner = Tags.getTags().getString(id+".banner");
@@ -76,7 +77,7 @@ public class TagUtils {
                     banner = Tags.getTags().getString(id+".content");
                 }
                 if (banner!=null) {
-                    return MiniMessage.miniMessage().deserialize(banner);
+                    return LegacyComponentSerializer.legacyAmpersand().deserialize(banner);
                 }
                 return Component.text("null"); // i not want null pointer
             }
