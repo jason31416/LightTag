@@ -2,7 +2,9 @@ package ink.neokoni.lightTag.Commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import ink.neokoni.lightTag.Commands.Functions.AddTag;
 import ink.neokoni.lightTag.Commands.Functions.ClearTag;
 import ink.neokoni.lightTag.Commands.Functions.Reload;
 import ink.neokoni.lightTag.Commands.Functions.SetTag;
@@ -37,7 +39,25 @@ public class AliasCommands {
                                 return Command.SINGLE_SUCCESS;
                         })))
                 .then(Commands.literal("list"))
-                .then(Commands.literal("add"))
+                .then(Commands.literal("add")
+                        .then(Commands.literal("STATIC")
+                                .then(Commands.argument("Content", StringArgumentType.string())
+                                        .executes(ctx -> {
+                                            new AddTag(ctx.getArgument("Content", String.class),
+                                                    ctx.getSource().getSender());
+                                            return Command.SINGLE_SUCCESS;
+                                        })))
+                        .then(Commands.literal("ANIMATION")
+                                .then(Commands.argument("Content", StringArgumentType.string())
+                                        .then(Commands.argument("Banner", StringArgumentType.string())
+                                                .then(Commands.argument("Delay", IntegerArgumentType.integer(0))
+                                                        .executes(ctx -> {
+                                                            new AddTag(ctx.getArgument("Content", String.class),
+                                                                    ctx.getArgument("Banner", String.class),
+                                                                    ctx.getArgument("Delay", Integer.class),
+                                                                    ctx.getSource().getSender());
+                                                            return Command.SINGLE_SUCCESS;
+                                                        }))))))
                 .then(Commands.literal("remove"))
                 .then(Commands.literal("clear")
                     .executes(ctx -> {

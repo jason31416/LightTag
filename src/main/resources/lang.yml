@@ -6,3 +6,4 @@ tag:
   not-have: "<color:#ffdbab>你还没有这个称号"
   successes: "<color:#ffdbab>已设置称号"
   cleared: "<color:#ffdbab>已清除称号"
+  added: "<color:#ffdbab>已创建此称号"
