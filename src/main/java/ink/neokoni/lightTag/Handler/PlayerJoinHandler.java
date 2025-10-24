@@ -22,14 +22,24 @@ public class PlayerJoinHandler implements Listener {
         Player player = e.getPlayer();
         YamlConfiguration data = PlayerDatas.getPlayerData();
         YamlConfiguration config = Configs.getConfigs();
-        if (!data.isSet(player.getUniqueId()+".using")) {
+
+        if (!data.isSet(player.getUniqueId()+".using")) { // set init tag for new player if enabled
             data.set(player.getUniqueId()+".using", config.getInt("init-tag"));
         }
 
-        if (config.getInt("init-tag") > -1 && data.getIntegerList(player.getUniqueId()+".owns").isEmpty()) {
-            List<Integer> ownedTags = new ArrayList<>();
+        int using = data.getInt(player.getUniqueId()+".using");
+        List<Integer> ownedTags = data.getIntegerList(player.getUniqueId()+".owns");
+
+        if (!ownedTags.contains(using)) { // player is using a not owned tag?
+            data.set(player.getUniqueId()+".using", config.getInt("init-tag"));
+        }
+
+        if (config.getInt("init-tag") > -1 &&
+                // if not own any tags or not have init tag, give then
+                (ownedTags.isEmpty() || ownedTags.contains(config.getInt("init-tag"))) ) {
+            List<Integer> tmp = new ArrayList<>();
             ownedTags.add(config.getInt("init-tag"));
-            data.set(player.getUniqueId()+".owns", ownedTags);
+            data.set(player.getUniqueId()+".owns", tmp);
         }
 
         PlayerDatas.savePlayerData(data);
