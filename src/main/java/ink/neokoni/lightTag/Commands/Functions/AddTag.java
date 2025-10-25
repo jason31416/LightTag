@@ -1,7 +1,7 @@
 package ink.neokoni.lightTag.Commands.Functions;
 
+import ink.neokoni.lightTag.DataStorage.Languages;
 import ink.neokoni.lightTag.DataStorage.Tags;
-import ink.neokoni.lightTag.Utils.TextUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -23,7 +23,7 @@ public class AddTag {
         tags.set(newTagId+".type", "STATIC");
         tags.set(newTagId+".content", content);
 
-        sender.sendMessage(TextUtils.getFormatedLang("tag.added"));
+        sender.sendMessage(Languages.getMessage("tag.added"));
     }
 
     public AddTag(String content, String banner, int delay, CommandSender sender) {
@@ -44,6 +44,6 @@ public class AddTag {
         tags.set(newTagId+".delay", delay);
         tags.set(newTagId+".content", tagContent);
 
-        sender.sendMessage(TextUtils.getFormatedLang("tag.added"));
+        sender.sendMessage(Languages.getMessage("tag.added"));
     }
 }

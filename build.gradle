@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("com.gradleup.shadow") version "8.3.0"
 }
 
 group = 'ink.neokoni'
@@ -16,11 +17,16 @@ repositories {
         name = "placeholderapi"
         url = "https://repo.extendedclip.com/releases/"
     }
+    maven {
+        name = "jitpack.io"
+        url = "https://jitpack.io"
+    }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
     compileOnly("me.clip:placeholderapi:2.11.6")
+    implementation("com.github.jason31416:planetlib:1.3.1")
 }
 
 tasks {
@@ -48,6 +54,11 @@ tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release.set(targetJavaVersion)
     }
+}
+
+tasks.shadowJar {
+    archiveBaseName.set('lightTag')
+    relocate("cn.jason31416.planetlib", "ink.neokoni.lightTag.lib.planetlib")
 }
 
 processResources {

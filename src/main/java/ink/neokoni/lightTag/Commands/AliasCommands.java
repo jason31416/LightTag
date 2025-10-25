@@ -1,5 +1,10 @@
 package ink.neokoni.lightTag.Commands;
 
+import cn.jason31416.planetlib.gui.GUI;
+import cn.jason31416.planetlib.gui.GUIBuilder;
+import cn.jason31416.planetlib.gui.GUISession;
+import cn.jason31416.planetlib.message.Message;
+import cn.jason31416.planetlib.wrapper.SimplePlayer;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -21,7 +26,7 @@ public class AliasCommands {
                         }))
                 .then(Commands.literal("set")
                         .executes(ctx -> {
-                            if (!(ctx.getSource().getSender() instanceof Player)) {
+                            if (!(ctx.getSource().getSender() instanceof Player pl)) {
                                 return Command.SINGLE_SUCCESS;
                             }
 

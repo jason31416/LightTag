@@ -5,7 +5,6 @@ import ink.neokoni.lightTag.DataStorage.Languages;
 import ink.neokoni.lightTag.DataStorage.PlayerDatas;
 import ink.neokoni.lightTag.DataStorage.Tags;
 import ink.neokoni.lightTag.PAPIs.PAPIsCore;
-import ink.neokoni.lightTag.Utils.TextUtils;
 import org.bukkit.command.CommandSender;
 
 public class Reload {
@@ -18,7 +17,7 @@ public class Reload {
         PAPIsCore.clearCache();
 
         if (sender!=null) {
-            sender.sendMessage(TextUtils.getFormatedLang("system.reload-success"));
+            sender.sendMessage(Languages.getMessage("system.reload-success"));
         }
     }
 }

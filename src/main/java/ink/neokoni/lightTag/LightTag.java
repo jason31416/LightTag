@@ -1,5 +1,8 @@
 package ink.neokoni.lightTag;
 
+import cn.jason31416.planetlib.PlanetLib;
+import cn.jason31416.planetlib.Required;
+import cn.jason31416.planetlib.message.InternalPlaceholder;
 import ink.neokoni.lightTag.Commands.Commands;
 import ink.neokoni.lightTag.DataStorage.Configs;
 import ink.neokoni.lightTag.DataStorage.Languages;
@@ -19,6 +22,9 @@ public final class LightTag extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         instance = this; // init instance
+        PlanetLib.initialize(this, Required.NBT, Required.PLACEHOLDERAPI); // init PlanetLib
+
+        InternalPlaceholder.registerPlaceholderHandler((s, p)->s.replace("{prefix}", Configs.getConfigs().getString("prefix", "")));
 
         Configs.loadConfig(); // init configs
         Languages.loadLanguage();
