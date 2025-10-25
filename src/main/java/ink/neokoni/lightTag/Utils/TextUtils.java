@@ -17,7 +17,7 @@ public class TextUtils {
 
     public static String getLang(String path, String key, String value) {
         String prefix = Configs.getConfigs().getString("prefix");
-        return prefix + Languages.getLanguages().getString(path.replace(key, value));
+        return prefix + Languages.getLanguages().getString(path).replace(key, value);
     }
 
     public static Component getFormatedLang(String path, String key, String value) {
