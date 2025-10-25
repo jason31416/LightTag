@@ -4,10 +4,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import ink.neokoni.lightTag.Commands.Functions.AddTag;
-import ink.neokoni.lightTag.Commands.Functions.ClearTag;
-import ink.neokoni.lightTag.Commands.Functions.Reload;
-import ink.neokoni.lightTag.Commands.Functions.SetTag;
+import ink.neokoni.lightTag.Commands.Functions.*;
 import ink.neokoni.lightTag.GUIs.SetTagGUI;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
@@ -38,7 +35,11 @@ public class AliasCommands {
                                 new SetTag(ctx.getSource().getSender(), ctx.getArgument("id", Integer.class));
                                 return Command.SINGLE_SUCCESS;
                         })))
-                .then(Commands.literal("list"))
+                .then(Commands.literal("list")
+                        .executes(ctx -> {
+                            new SendPlayerTagList(ctx.getSource().getSender());
+                            return Command.SINGLE_SUCCESS;
+                        }))
                 .then(Commands.literal("add")
                         .then(Commands.literal("STATIC")
                                 .then(Commands.argument("Content", StringArgumentType.string())

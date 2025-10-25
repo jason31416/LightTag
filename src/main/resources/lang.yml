@@ -7,3 +7,7 @@ tag:
   successes: "<color:#ffdbab>已设置称号"
   cleared: "<color:#ffdbab>已清除称号"
   added: "<color:#ffdbab>已创建此称号"
+
+list:
+  head: "<color:#ffdbab>你目前拥有以下{total}个称号"
+  nothing: "<color:#ffdbab>咱似乎还没有任何称号... :("
