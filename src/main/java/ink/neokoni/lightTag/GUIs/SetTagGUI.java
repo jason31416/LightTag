@@ -1,83 +1,61 @@
 package ink.neokoni.lightTag.GUIs;
 
+import cn.jason31416.planetlib.gui.GUI;
+import cn.jason31416.planetlib.gui.GUIBuilder;
+import cn.jason31416.planetlib.gui.itemgroup.InventoryList;
+import cn.jason31416.planetlib.message.Message;
+import cn.jason31416.planetlib.wrapper.SimpleItemStack;
+import cn.jason31416.planetlib.wrapper.SimplePlayer;
 import ink.neokoni.lightTag.Commands.Functions.SetTag;
-import ink.neokoni.lightTag.DataStorage.Caches;
 import ink.neokoni.lightTag.DataStorage.PlayerDatas;
 import ink.neokoni.lightTag.DataStorage.Tags;
-import ink.neokoni.lightTag.GUIs.Base.ChestMenu;
-import ink.neokoni.lightTag.Utils.Item.ItemCustomDataUtils;
 import ink.neokoni.lightTag.Utils.TagUtils;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
 public class SetTagGUI {
-    private Player player;
-    private ChestMenu menu;
-    public SetTagGUI(Player player) {
-        this.player = player;
-        menu = new ChestMenu(6);
-
+    public static GUI build(Player pl){
         YamlConfiguration data = PlayerDatas.getPlayerData();
-        List<Integer> owns = data.getIntegerList(this.player.getUniqueId()+".owns");
-
-        for (int i : owns) {
-            ItemStack tagItem = new ItemStack(Material.NAME_TAG);
-            Component tagView = TagUtils.getViewById(i);
-            String type = Tags.getTags().getString(i+".type");
-            boolean isAnimation = (type != null && type.equals("ANIMATION"));
-
-            ItemMeta meta = tagItem.getItemMeta();
-            meta.displayName(tagView);
-            if (isAnimation)meta.setEnchantmentGlintOverride(true);
-            meta.lore(List.of(
-                    MiniMessage.miniMessage().deserialize("称号: ").append(tagView),
-                    MiniMessage.miniMessage().deserialize(isAnimation?"<yellow>动态称号":"<red>静态称号"),
-                    MiniMessage.miniMessage().deserialize("ID: "+i),
-                    MiniMessage.miniMessage().deserialize(""),
-                    MiniMessage.miniMessage().deserialize("点击使用")
-            ));
-            tagItem.setItemMeta(meta);
-
-            menu.put(tagItem, "TagID:"+i);
-        }
-
-        menu.setTitle("<yellow>设置称号");
-    }
-
-    public void open() {
-        menu.open(player);
-        Caches.setTagGUI.put(menu.getInv(), this);
-    }
-
-    public ChestMenu getMenu() {
-        return menu;
-    }
-
-    public void handleClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player)) {
-            return;
-        }
-
-        ItemStack item = event.getCurrentItem();
-
-        if (item!=null&& ItemCustomDataUtils.getInt(item, menu, "TagID") > -1) {
-            int id = ItemCustomDataUtils.getInt(item, menu, "TagID");
-
-            new SetTag(player, id);
-            Caches.setTagGUI.remove(event.getClickedInventory());
-            event.getInventory().close();
-            return;
-        }
-
-        // todo: other is placeholder item or other functions
-
+        List<Integer> owns = data.getIntegerList(pl.getUniqueId()+".owns");
+        return new GUIBuilder("set-tag")
+                .name(Message.of("<yellow>设置称号"))
+                .shape("a a a a a a a a a")
+                .shape("a a a a a a a a a")
+                .shape("a a a a a a a a a")
+                .shape("a a a a a a a a a")
+                .shape("a a a a a a a a a")
+                .shape("p x x x x x x x n")
+                .setItem("x", new SimpleItemStack().setName("").setMaterial(Material.GRAY_STAINED_GLASS))
+                .setItem("a",
+                        GUIBuilder.ListedItem.builder().id("list").items(
+                                owns.stream()
+                                        .map(i -> new InventoryList.ListItem(
+                                                ()->{
+                                                    Component tagView = TagUtils.getViewById(i);
+                                                    String type = Tags.getTags().getString(i+".type");
+                                                    boolean isAnimation = (type != null && type.equals("ANIMATION"));
+                                                    return new SimpleItemStack()
+                                                            .setMaterial(Material.NAME_TAG)
+                                                            .setName(Message.of(tagView))
+                                                            .setGlow(isAnimation)
+                                                            .setLore(List.of(
+                                                                    "称号: "+Message.of(tagView).toFormatted(),
+                                                                    isAnimation?"<yellow>(动态称号)":"<red>(静态称号)",
+                                                                    "ID: "+i,
+                                                                    "",
+                                                                    "点击使用"
+                                                            ));
+                                                },
+                                                List.of(inv->{
+                                                    new SetTag(pl, i);
+                                                    inv.getGui().close();
+                                                })
+                                        )).toList())
+                )
+                .build();
     }
 }

@@ -9,12 +9,10 @@ import org.bukkit.entity.Player;
 
 public class SetTag {
     public SetTag(CommandSender sender, int id) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage(Languages.getMessage("system.player-only"));
             return;
         }
-
-        Player player = (Player) sender;
 
         YamlConfiguration playerData = PlayerDatas.getPlayerData();
         if (!playerData.getIntegerList(player.getUniqueId()+".owns").contains(id)) {

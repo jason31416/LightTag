@@ -3,17 +3,32 @@ package ink.neokoni.lightTag.Commands;
 import cn.jason31416.planetlib.gui.GUI;
 import cn.jason31416.planetlib.gui.GUIBuilder;
 import cn.jason31416.planetlib.gui.GUISession;
+import cn.jason31416.planetlib.gui.GUITemplate;
+import cn.jason31416.planetlib.gui.itemgroup.InventoryList;
 import cn.jason31416.planetlib.message.Message;
+import cn.jason31416.planetlib.wrapper.SimpleItemStack;
 import cn.jason31416.planetlib.wrapper.SimplePlayer;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import ink.neokoni.lightTag.Commands.Functions.*;
+import ink.neokoni.lightTag.DataStorage.Caches;
+import ink.neokoni.lightTag.DataStorage.PlayerDatas;
+import ink.neokoni.lightTag.DataStorage.Tags;
 import ink.neokoni.lightTag.GUIs.SetTagGUI;
+import ink.neokoni.lightTag.Utils.TagUtils;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Material;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
 
 public class AliasCommands {
     public LiteralArgumentBuilder<CommandSourceStack> getBuilt(String root) {
@@ -30,7 +45,7 @@ public class AliasCommands {
                                 return Command.SINGLE_SUCCESS;
                             }
 
-                            new SetTagGUI((Player) ctx.getSource().getSender()).open();
+                            new GUISession(SimplePlayer.of(pl)).display(SetTagGUI.build(pl));
 
                             return Command.SINGLE_SUCCESS;
                         })
