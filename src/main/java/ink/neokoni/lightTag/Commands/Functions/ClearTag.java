@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 public class ClearTag {
     public ClearTag(CommandSender sender) {
         if (!(sender instanceof Player)) {
+            sender.sendMessage(TextUtils.getFormatedLang("system.player-only"));
             return;
         }
 
